@@ -18,5 +18,4 @@ class Coordinate:
         return f'({self.x}, {self.y})'
 
     def __hash__(self):
-        # h(h(x) || h(y)) shouldn't cause problems?
-        return hash(int(str(hash(self.x)) +str(hash(self.y))))
+        return hash((self.x, self.y))

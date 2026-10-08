@@ -41,3 +41,6 @@ class Piece:
             output += f'{str(coord)}, '
         output += ')'
         return output
+
+    def __hash__(self):
+        return hash(frozenset(self.coords))

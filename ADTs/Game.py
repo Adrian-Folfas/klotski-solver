@@ -58,8 +58,7 @@ class Game:
     # Hash function for game states for bfs visited checks.
     # Might need to alter in the future.
     def game_hash(self) -> int:
-        hash_set = frozenset([(coord.x, coord.y) for piece in self.pieces for coord in piece.coords])
-        return hash(hash_set)
+        return hash(frozenset([piece for piece in self.pieces]))
 
     def bfs(self):
         # Initialize queue, path, and visited set for bfs.
