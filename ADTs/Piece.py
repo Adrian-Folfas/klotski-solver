@@ -7,7 +7,7 @@ class Piece:
     def __init__(self, coords: list[Coordinate]):
         self.coords = coords
 
-    def can_move(self, game: Game, direction_vector: tuple[int, int]):
+    def can_move(self, game: Game, direction_vector: tuple[int, int]) -> bool:
         board = game.board
         cols, rows = board.width, board.height
         for coord in self.coords:
@@ -18,7 +18,7 @@ class Piece:
                 return False
         return True
 
-    def move(self, game: Game, direction_vector: tuple[int, int]):
+    def move(self, game: Game, direction_vector: tuple[int, int]) -> Game:
         new_coords = []
         free_coords = game.free_coords
         for coord in self.coords:

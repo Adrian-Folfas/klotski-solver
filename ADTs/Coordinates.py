@@ -4,7 +4,7 @@ class Coordinate:
         self.x = x
         self.y = y
 
-    def get_updated_coord(self, direction_vector: tuple[int, int]):
+    def get_updated_coord(self, direction_vector: tuple[int, int]) -> Coordinate:
         new_x = self.x + direction_vector[0]
         new_y = self.y + direction_vector[1]
         return Coordinate(new_x, new_y)
