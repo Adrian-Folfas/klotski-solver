@@ -87,6 +87,9 @@ class Game:
         # If queue is exhausted and no path is returned, then no path will exist.
         return None
 
+    def solve_game(self):
+        return self.bfs()
+
     def deepcopy(self) -> Game:
         # Coords and boards are treated as immutable.
         free_coords = set(list[self.free_coords][:])
