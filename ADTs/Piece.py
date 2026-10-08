@@ -6,7 +6,7 @@ class Piece:
     def __init__(self, coords: list[Coordinate]):
         self.coords = coords
 
-    def can_move(self, game: Game, direction_vector: tuple[int, int]) -> bool:
+    def can_move(self, game, direction_vector: tuple[int, int]) -> bool:
         from .Game import Game
         board = game.board
         cols, rows = board.cols, board.rows
@@ -19,7 +19,7 @@ class Piece:
         return True
 
     # Returns a new Game object representing board after movement made.
-    def move(self, game: Game, direction_vector: tuple[int, int]) -> Game:
+    def move(self, game, direction_vector: tuple[int, int]):
         from .Game import Game
         new_coords = []
         game = game.deepcopy(skip=self)
