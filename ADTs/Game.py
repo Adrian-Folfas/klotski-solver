@@ -79,14 +79,14 @@ class Game:
                 return path
 
             for piece, direction in moves:
-                new_game = piece.move(self, direction)
+                new_game = piece.move(game, direction)
                 new_hash = new_game.game_hash()
                 if new_hash not in visited:
                     visited.add(new_hash)
                     queue.append((new_game, path + [[piece, direction]]))
 
         # If queue is exhausted and no path is returned, then no path will exist.
-        return None
+        return []
 
     def solve_game(self):
         return self.bfs()
@@ -98,5 +98,14 @@ class Game:
         board = self.board
 
         # Pieces are mutable since coordinates change, so need to reconstruct.
-        pieces = [Piece([coord for piece in self.pieces for coord in piece.coords if piece is not skip])]
+        pieces = []
+        for piece in self.pieces:
+            if piece is skip:
+                continue
+            coords = []
+            for coord in piece.coords:
+                coords.append(coord)
+            new_piece = Piece(coords)
+            pieces.append(new_piece)
+
         return Game(free_coords, board, pieces)
