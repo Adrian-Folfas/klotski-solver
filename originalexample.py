@@ -36,6 +36,7 @@ pieces = [piece1, piece2, piece3, piece4, piece5, piece6, piece7, piece8, pieces
 game = Game(free_coords, board, pieces)
 
 path = game.solve_game()
+print(path)
 for i in range(1, len(path)):
     print(i)
     print(path[i])

@@ -1,13 +1,13 @@
-from Coordinates import Coordinate
-from Board import Board
-from Piece import Piece
+from .Coordinates import Coordinate
+from .Board import Board
+from .Piece import Piece
 
-DIRECTIONS = {
-    "up": (0, +1),
-    "down": (0, -1),
-    "left": (-1, 0),
-    "right": (+1, 0),
-}
+DIRECTIONS = [
+    (0, +1),
+    (0, -1),
+    (-1, 0),
+    (+1, 0)
+]
 
 class Game:
 
@@ -22,7 +22,7 @@ class Game:
     # Returns the piece that is trying to be moved to end of the puzzle.
     # Assumes the target piece is the largest piece in the game.
     def find_target_piece(self) -> Piece:
-        return max(self.pieces, key=len)
+        return max(self.pieces, key=lambda p: len(p.coords))
 
     # Returns whether the game state represents a win or not.
     # Assumes target piece is a square
@@ -58,7 +58,7 @@ class Game:
     # Hash function for game states for bfs visited checks.
     # Might need to alter in the future.
     def game_hash(self) -> int:
-        hash_set = frozenset([(piece.x, piece.y) for piece in self.pieces])
+        hash_set = frozenset([(coord.x, coord.y) for piece in self.pieces for coord in piece.coords])
         return hash(hash_set)
 
     def bfs(self):
@@ -71,8 +71,9 @@ class Game:
         while queue:
             # Grab first game and path up to it.
             game, path = queue.pop(0)
-            moves = self.find_moves()
-
+            moves = game.find_moves()
+            count += 1
+            print(count)
             # If game state satisfies victory function, return path.
             if game.victory_check():
                 return path
@@ -90,11 +91,12 @@ class Game:
     def solve_game(self):
         return self.bfs()
 
-    def deepcopy(self) -> Game:
+    # Optional parameter to avoid copying over a specific piece.
+    def deepcopy(self, skip=None) -> Game:
         # Coords and boards are treated as immutable.
-        free_coords = set(list[self.free_coords][:])
+        free_coords = set(list(self.free_coords)[:])
         board = self.board
 
         # Pieces are mutable since coordinates change, so need to reconstruct.
-        pieces = [Piece([coord for piece in self.pieces for coord in piece])]
+        pieces = [Piece([coord for piece in self.pieces for coord in piece.coords if piece is not skip])]
         return Game(free_coords, board, pieces)

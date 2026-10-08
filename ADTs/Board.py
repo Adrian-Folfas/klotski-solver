@@ -1,4 +1,4 @@
-from Coordinates import Coordinate
+from .Coordinates import Coordinate
 
 class Board:
 

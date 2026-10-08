@@ -1,6 +1,5 @@
-from Coordinates import Coordinate
-from Board import Board
-from Game import Game
+from .Coordinates import Coordinate
+from .Board import Board
 
 class Piece:
 
@@ -8,8 +7,9 @@ class Piece:
         self.coords = coords
 
     def can_move(self, game: Game, direction_vector: tuple[int, int]) -> bool:
+        from .Game import Game
         board = game.board
-        cols, rows = board.width, board.height
+        cols, rows = board.cols, board.rows
         for coord in self.coords:
             new_coord = coord.get_updated_coord(direction_vector)
             if not board.is_in_bounds(new_coord):
@@ -20,8 +20,9 @@ class Piece:
 
     # Returns a new Game object representing board after movement made.
     def move(self, game: Game, direction_vector: tuple[int, int]) -> Game:
+        from .Game import Game
         new_coords = []
-        game = game.deepcopy()
+        game = game.deepcopy(skip=self)
         free_coords = game.free_coords
         for coord in self.coords:
             new_coord = coord.get_updated_coord(direction_vector)
@@ -29,7 +30,8 @@ class Piece:
             free_coords.add(coord)
         for coord in new_coords:
             free_coords.remove(coord)
-        self.coords = new_coords
+        new_piece = Piece(new_coords)
+        game.pieces.append(new_piece)
         return game
 
     # For clean printing of list of (piece, move)
