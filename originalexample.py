@@ -36,7 +36,13 @@ pieces = [piece1, piece2, piece3, piece4, piece5, piece6, piece7, piece8, pieces
 game = Game(free_coords, board, pieces)
 
 path = game.solve_game()
-print(path)
+translated_vectors = {
+    (1, 0): "right",
+    (-1, 0): "left",
+    (0, 1): "up",
+    (0, -1): "down",
+
+}
 for i in range(1, len(path)):
     print(i)
-    print(path[i])
+    print([path[i][0], translated_vectors[path[i][1]]])

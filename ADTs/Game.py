@@ -64,15 +64,12 @@ class Game:
         # Initialize queue, path, and visited set for bfs.
         queue = [(self, [])]
         visited = {self.game_hash()}
-        count = 0
 
         # While games still exist in the queue.
         while queue:
             # Grab first game and path up to it.
             game, path = queue.pop(0)
             moves = game.find_moves()
-            count += 1
-            print(count)
             # If game state satisfies victory function, return path.
             if game.victory_check():
                 return path
