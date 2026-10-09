@@ -10,5 +10,5 @@ class Board:
         self.rows = rows
         self.exit_squares = exit_squares
 
-    def is_in_bounds(self, coord: Coordinate):
+    def is_in_bounds(self, coord: Coordinate) -> bool:
         return 0 <= coord.x < self.cols and 0 <= coord.y < self.rows

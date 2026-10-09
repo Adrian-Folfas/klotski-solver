@@ -17,7 +17,7 @@ class Game:
         self.pieces = pieces
 
         # Might use later for more efficient coord checks
-        self.coords_to_pieces = {coord: piece for piece in self.pieces for coord in piece.coords}
+        # self.coords_to_pieces = {coord: piece for piece in self.pieces for coord in piece.coords}
 
     # Returns the piece that is trying to be moved to end of the puzzle.
     # Assumes the target piece is the largest piece in the game.
@@ -34,8 +34,8 @@ class Game:
                 return False
         return True
 
-    # Returns a list of tuples of (piece, legal_direction_vector)
-    def find_moves(self) -> dict[Piece, tuple[int, int]]:
+    # Returns a list of tuples of (piece, legal_move_direction_vector)
+    def find_moves(self) -> list[Piece, tuple[int, int]]:
         moves = []
         for piece in self.pieces:
             for direction_vector in DIRECTIONS:
@@ -56,7 +56,6 @@ class Game:
     #             else:
 
     # Hash function for game states for bfs visited checks.
-    # Might need to alter in the future.
     def game_hash(self) -> int:
         return hash(frozenset([piece for piece in self.pieces]))
 

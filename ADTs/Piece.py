@@ -6,6 +6,8 @@ class Piece:
     def __init__(self, coords: list[Coordinate]):
         self.coords = coords
 
+    # Returns bool indicating whether self can be moved in given direction.
+    # In practice, only fed unit vectors but should work regardless
     def can_move(self, game, direction_vector: tuple[int, int]) -> bool:
         from .Game import Game
         board = game.board
@@ -18,7 +20,7 @@ class Piece:
                 return False
         return True
 
-    # Returns a new Game object representing board after movement made.
+    # Returns a new Game object representing board after a movement made.
     def move(self, game, direction_vector: tuple[int, int]):
         from .Game import Game
         new_coords = []
