@@ -5,4 +5,4 @@ Major WIP, currently only a backend.
 
 Running originalexample.py prints out a sequence of numbers and lists. Numbers correspond to which move it is, and each list contains a tuple of the coordinates of a piece on the board, and a string telling you which direction to move the piece.
 
-For coordinates, (x, y) = (col, row)
+For coordinates, (x, y) = (col, row) with (0, 0) being the bottom-left square.
