@@ -4,11 +4,27 @@ from .Board import Board
 class Piece:
 
     def __init__(self, coords: list[Coordinate]):
+        """
+        Constructor for Pieces.
+
+        Args:
+            coords (list[Coordinate]): the list of Coordinates the Piece occupies.
+        """
         self.coords = coords
 
     # Returns bool indicating whether self can be moved in given direction.
     # In practice, only fed unit vectors but should work regardless
     def can_move(self, game, direction_vector: tuple[int, int]) -> bool:
+        """
+        Movability checker.
+
+        Args:
+            game (Game): The current game representation
+            direction_vector (tuple[int, int]): the direction vector in which to check movement.
+
+        Return:
+            bool: Whether self can move in the specified direction.
+        """
         from .Game import Game
         board = game.board
         cols, rows = board.cols, board.rows
@@ -22,6 +38,16 @@ class Piece:
 
     # Returns a new Game object representing board after a movement made.
     def move(self, game, direction_vector: tuple[int, int]):
+        """
+        Piece-moving function.
+
+        Args:
+            game (Game): The current game representation.
+            direction_vector (tuple[int, int]): the direction vector in which to move self.
+
+        Return:
+            Game: Returns a Game object representing the game after the piece is moved.
+        """
         from .Game import Game
         new_coords = []
         game = game.deepcopy(skip=self)

@@ -12,6 +12,14 @@ DIRECTIONS = [
 class Game:
 
     def __init__(self, free_coords: set[Coordinate], board: Board, pieces: list[Piece]):
+        """
+        Constructor for Games.
+
+        Args:
+            free_coord (set[Coordinate]): The set of unoccupied Coordinates.
+            board (Board): The game board.
+            pieces (list[Piece]): The pieces on the board.
+        """
         self.free_coords = free_coords
         self.board = board
         self.pieces = pieces
@@ -19,14 +27,23 @@ class Game:
         # Might use later for more efficient coord checks
         # self.coords_to_pieces = {coord: piece for piece in self.pieces for coord in piece.coords}
 
-    # Returns the piece that is trying to be moved to end of the puzzle.
-    # Assumes the target piece is the largest piece in the game.
     def find_target_piece(self) -> Piece:
+        """
+        Finds the piece we're trying to free.
+
+        Return:
+            Piece: The largest Piece on the board.
+        """
         return max(self.pieces, key=lambda p: len(p.coords))
 
-    # Returns whether the game state represents a win or not.
-    # Assumes target piece is a square
     def victory_check(self) -> bool:
+        """
+        Victory checker.
+
+        Return:
+            bool: Whether the game has been won.
+            Assumes that exit dimensions align with target piece dimensions
+        """
         exit_squares = self.board.exit_squares
         target_piece = self.find_target_piece()
         for coord in exit_squares:
@@ -34,8 +51,14 @@ class Game:
                 return False
         return True
 
-    # Returns a list of tuples of (piece, legal_move_direction_vector)
     def find_moves(self) -> list[Piece, tuple[int, int]]:
+        """
+        Legal move finder for game representation.
+
+        Return:
+           list[Piece, tuple[int, int]]: A list of tuples containing pieces
+                                         and the directions they can move in.
+        """
         moves = []
         for piece in self.pieces:
             for direction_vector in DIRECTIONS:
@@ -55,11 +78,23 @@ class Game:
     #                 continue
     #             else:
 
-    # Hash function for game states for bfs visited checks.
     def game_hash(self) -> int:
+        """
+        Hash for game states.
+
+        Return:
+            int: a hopefully-unique identifier for a game state.
+        """
         return hash(frozenset([piece for piece in self.pieces]))
 
     def bfs(self):
+        """
+        BFS on legal moves to solve game.
+
+        Return:
+            Empty list if no solution exists, otherwise a list of lists, where each sub-list
+            contains the piece and direction vector it should be moved, in puzzle-solving order.
+        """
         # Initialize queue, path, and visited set for bfs.
         queue = [(self, [])]
         visited = {self.game_hash()}
@@ -84,10 +119,28 @@ class Game:
         return []
 
     def solve_game(self):
+        """
+        Game solver.
+
+        Return:
+            Empty list if no solution exists, otherwise a list of lists, where each sub-list
+            contains the piece and direction vector it should be moved, in puzzle-solving order.
+        """
         return self.bfs()
 
     # Optional parameter to avoid copying over a specific piece.
     def deepcopy(self, skip=None) -> Game:
+        """
+        Method to return a second Game object representing the same state,
+        potentially with the exception of one piece.
+
+        Args:
+            skip (Piece | None): A Piece to not copy, or None if full-copy required.
+
+        Return:
+            Game: A new Game object of the same state, with the exception of the possibly specified
+                  uncopied piece.
+        """
         # Coords and boards are treated as immutable.
         free_coords = set(list(self.free_coords)[:])
         board = self.board
