@@ -8,8 +8,9 @@ class Piece:
         Constructor for Pieces.
 
         Args:
-            coords (list[Coordinate]): the list of Coordinates the Piece occupies.
+            coords (list[Coordinate]): the non-empty list of Coordinates the Piece occupies.
         """
+        assert len(coords) > 0, "coords cannot be an empty list"
         self.coords = coords
 
     # Returns bool indicating whether self can be moved in given direction.
@@ -44,6 +45,7 @@ class Piece:
         Args:
             game (Game): The current game representation.
             direction_vector (tuple[int, int]): the direction vector in which to move self.
+                                                Must be a legal move.
 
         Return:
             Game: Returns a Game object representing the game after the piece is moved.

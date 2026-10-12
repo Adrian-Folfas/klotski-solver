@@ -27,7 +27,7 @@ class Game:
         # Might use later for more efficient coord checks
         # self.coords_to_pieces = {coord: piece for piece in self.pieces for coord in piece.coords}
 
-    def find_target_piece(self) -> Piece:
+    def _find_target_piece(self) -> Piece:
         """
         Finds the piece we're trying to free.
 
@@ -36,7 +36,7 @@ class Game:
         """
         return max(self.pieces, key=lambda p: len(p.coords))
 
-    def victory_check(self) -> bool:
+    def _victory_check(self) -> bool:
         """
         Victory checker.
 
@@ -51,7 +51,7 @@ class Game:
                 return False
         return True
 
-    def find_moves(self) -> list[Piece, tuple[int, int]]:
+    def _find_moves(self) -> list[Piece, tuple[int, int]]:
         """
         Legal move finder for game representation.
 
@@ -78,7 +78,7 @@ class Game:
     #                 continue
     #             else:
 
-    def game_hash(self) -> int:
+    def _game_hash(self) -> int:
         """
         Hash for game states.
 
@@ -87,7 +87,7 @@ class Game:
         """
         return hash(frozenset([piece for piece in self.pieces]))
 
-    def bfs(self):
+    def _bfs(self):
         """
         BFS on legal moves to solve game.
 

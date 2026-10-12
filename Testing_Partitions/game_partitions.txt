@@ -1,0 +1,3 @@
+partition on solve_game:
+    - unsolvable game
+    - solvable game

@@ -1,0 +1,13 @@
+Partitions on cols, rows constructor inputs:
+    - cols = 1, rows > 1
+    - cols > 1, rows = 1
+    - cols, rows both > 1
+
+Partitions on exit_squares constructor input:
+    - Empty list
+    - Some number of Coordinates
+
+Partitions on is_in_bounds:
+    - coord is in bounds
+    - coord is one step out of bounds
+    - coord is far out of bounds

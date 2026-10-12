@@ -1,0 +1,13 @@
+partition on constructor:
+    - coords has 1 coordinate
+    - coords has multiple coordinates
+
+partition on can_move:
+    - checking movement out of bounds
+    - checking movement of piece into another piece
+    - checking valid movement into empty square
+
+partition on move:
+    - moving a 1x1 piece
+    - moving a larger piece
+

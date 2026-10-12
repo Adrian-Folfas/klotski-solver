@@ -1,0 +1,22 @@
+Partitions on constructor inputs:
+    - (0, 0)
+    - Both positive integers
+    - One positive, one <1
+    - Both negative integers
+
+Partitions on x, y:
+    - Called on value of 0
+    - Called on non-zero value
+
+Partitions on get_updated_coord:
+    - direction_vector = (0, 0)
+    - direction vector changes only x-value
+    - direction vector changes only y-value
+    - direction vector changes both x, y values
+
+Partitions on __eq__:
+    - Coordinates share no values
+    - Coordinates share only x values
+    - Coordinates share only y values
+    - Two coordinates share both values
+    - Same object in memory
