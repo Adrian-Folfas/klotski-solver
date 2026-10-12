@@ -31,4 +31,4 @@ class Board:
         Returns:
             bool: in-bounds-ness of the coord.
         """
-        return 0 <= coord.x < self.cols and 0 <= coord.y < self.rows
+        return 0 <= coord.x() < self.cols and 0 <= coord.y() < self.rows

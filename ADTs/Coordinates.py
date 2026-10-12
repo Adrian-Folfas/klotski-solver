@@ -29,15 +29,15 @@ class Coordinate:
         Returns:
             Coordinate: the new Coordinate.
         """
-        new_x = self.x + direction_vector[0]
-        new_y = self.y + direction_vector[1]
+        new_x = self.x() + direction_vector[0]
+        new_y = self.y() + direction_vector[1]
         return Coordinate(new_x, new_y)
 
     def __eq__(self, other: Coordinate):
-        return self.x == other.x and self.y == other.y
+        return self._x == other.x() and self._y == other.y()
 
     def __str__(self):
-        return f'({self.x}, {self.y})'
+        return f'({self._x}, {self._y})'
 
     def __hash__(self):
-        return hash((self.x, self.y))
+        return hash((self._x, self._y))

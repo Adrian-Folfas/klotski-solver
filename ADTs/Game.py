@@ -45,7 +45,7 @@ class Game:
             Assumes that exit dimensions align with target piece dimensions
         """
         exit_squares = self.board.exit_squares
-        target_piece = self.find_target_piece()
+        target_piece = self._find_target_piece()
         for coord in exit_squares:
             if coord not in target_piece.coords:
                 return False
@@ -97,20 +97,20 @@ class Game:
         """
         # Initialize queue, path, and visited set for bfs.
         queue = [(self, [])]
-        visited = {self.game_hash()}
+        visited = {self._game_hash()}
 
         # While games still exist in the queue.
         while queue:
             # Grab first game and path up to it.
             game, path = queue.pop(0)
-            moves = game.find_moves()
+            moves = game._find_moves()
             # If game state satisfies victory function, return path.
-            if game.victory_check():
+            if game._victory_check():
                 return path
 
             for piece, direction in moves:
                 new_game = piece.move(game, direction)
-                new_hash = new_game.game_hash()
+                new_hash = new_game._game_hash()
                 if new_hash not in visited:
                     visited.add(new_hash)
                     queue.append((new_game, path + [[piece, direction]]))
@@ -125,8 +125,9 @@ class Game:
         Return:
             Empty list if no solution exists, otherwise a list of lists, where each sub-list
             contains the piece and direction vector it should be moved, in puzzle-solving order.
+            Should be the shortest solution possible.
         """
-        return self.bfs()
+        return self._bfs()
 
     # Optional parameter to avoid copying over a specific piece.
     def deepcopy(self, skip=None) -> Game:
