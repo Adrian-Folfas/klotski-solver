@@ -1,0 +1,123 @@
+/*
+ * style.css - deliberately plain: a framed board, a message box and a row of
+ * controls, all in the same column.
+ */
+
+:root {
+  --text: #000;
+  --page: #fff;
+  --frame: #000;          /* thin box around the board */
+  --message-border: #ccc;
+  --grid: #bbb;           /* lines between squares */
+  --wall: #000;           /* thick outer wall */
+  --piece: #e9e4d8;       /* ordinary blocks */
+  --piece-edge: #000;
+  --target: #c8463d;      /* the block that has to escape */
+
+  --column-width: 420px;
+}
+
+body {
+  margin: 0;
+  padding: 24px 16px;
+  background: var(--page);
+  color: var(--text);
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+main {
+  max-width: var(--column-width);
+}
+
+h1 {
+  margin: 0 0 16px;
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+
+/* ----- Board ----- */
+
+.board-frame {
+  border: 1px solid var(--frame);
+  padding: 8px;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Without this, dragging on a touch screen would scroll the page. */
+  touch-action: none;
+  user-select: none;
+}
+
+.grid line {
+  stroke: var(--grid);
+  stroke-width: 1.5;
+}
+
+.walls line {
+  stroke: var(--wall);
+  stroke-linecap: square; /* closes the corners where wall segments meet */
+}
+
+.piece rect {
+  fill: var(--piece);
+  stroke: var(--piece-edge);
+  stroke-width: 2;
+}
+
+.piece.target rect {
+  fill: var(--target);
+}
+
+.piece {
+  cursor: grab;
+  /* Animates each one-square slide, for both dragging and Next/Back. */
+  transition: transform 120ms ease-out;
+}
+
+.piece.dragging {
+  cursor: grabbing;
+}
+
+/* ----- Message box ----- */
+
+.message {
+  margin-top: 16px;
+  padding: 8px 12px;
+  border: 1px solid var(--message-border);
+  min-height: 5.5em;
+}
+
+.message p {
+  margin: 0.4em 0;
+}
+
+/* ----- Controls ----- */
+
+.controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+button {
+  font: inherit;
+  padding: 4px 12px;
+}
+
+#move-counter {
+  margin-left: 8px;
+  /* Equal-width digits, so the counter doesn't jiggle as it changes. */
+  font-variant-numeric: tabular-nums;
+}
+
+/* Respect the system setting for reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  .piece {
+    transition: none;
+  }
+}
