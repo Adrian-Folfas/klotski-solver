@@ -33,6 +33,11 @@ own site) and visit `/web/`. The only requirement is to keep `web/` and
 For GitHub Pages: Settings → Pages → deploy from the `main` branch, root
 folder. The page is then at `https://<user>.github.io/klotski-solver/web/`.
 
+The empty `.nojekyll` file at the repository root matters for GitHub Pages.
+Without it, Pages runs the site through Jekyll, which skips files whose names
+start with an underscore. That would leave out `ADTs/__init__.py`, and the
+solver would fail to load.
+
 ## How the code is organised
 
 | File | What it does |
