@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Klotski Solver</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <!-- Filled in from the puzzle's name by main.js. -->
+    <h1 id="title">Klotski</h1>
+
+    <!-- The board. board-view.js draws everything inside the <svg>. -->
+    <div class="board-frame">
+      <svg id="board" role="img" aria-label="Klotski board"></svg>
+    </div>
+
+    <!-- Instructions, plus a status line that main.js keeps up to date.
+         aria-live makes screen readers announce status changes. -->
+    <div class="message">
+      <p>Drag blocks to slide them. Get the red block out through the gap
+        in the wall, or use Next to step through the shortest solution.</p>
+      <p id="status" aria-live="polite"></p>
+    </div>
+
+    <div class="controls">
+      <button id="back" type="button">&larr; Back</button>
+      <button id="next" type="button">Next &rarr;</button>
+      <span id="move-counter">Moves: 0</span>
+    </div>
+  </main>
+
+  <!-- type="module" lets the scripts import each other. Modules only load
+       over http(s), not from a file:// URL; see web/README.md. -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
